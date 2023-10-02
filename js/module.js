@@ -11,11 +11,11 @@ const printMessage = (() => {
 })();
 
 /**
- * 
+ * Ejemplo de un modulo
  */
 const alertMessage = (() => {
   return {
-    alert: (message) => {
+    print: (message) => {
       alert(message);
     },
   };
@@ -24,6 +24,9 @@ const alertMessage = (() => {
 /**
  * Ejemplo del patron de diseño module
  * El modulo es una funcion que se autoejecuta y devuelve un objeto con las propiedades y metodos que queremos que sean publicos
+ * @param {printer} printer
+ * @returns
+ * @autor Humberto
  */
 const saludar = (function (printer) {
 	// console.log('Hola desde el modulo');
@@ -39,6 +42,6 @@ const saludar = (function (printer) {
 			printer.print(texto);
 		},
 	};
-})(printMessage);
+})(alertMessage);
 
 saludar.message("Daniel");
