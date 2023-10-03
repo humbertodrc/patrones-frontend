@@ -77,3 +77,57 @@ console.log(persona.goToDestination()); // Caminando a tu destino
 persona.choseTransportationStrategy(new CarStrategy());
 console.log(persona.goToDestination()); // Viajando en automovil a tu destino
 
+
+//EJemplo 2 de Strategy, imagina que estás desarrollando un sistema de procesamiento de pagos para una tienda en línea. Los métodos de pago pueden variar, como tarjeta de crédito, PayPal y transferencia bancaria. Cada método de pago es una estrategia diferente, y el sistema debe ser flexible para cambiar la estrategia de pago según las preferencias del cliente.
+
+// Interface para las estrategias de pago
+class PaymentStrategy {
+  pay(amount) {
+    // Este metodo sera implementado por las estrategias concretas
+  }
+}
+
+// Estrategia de pago con PayPal
+class CreditCartPayment extends PaymentStrategy {
+  pay(amount) {
+    console.log(`Pagando ${amount} usando tarjeta de credito`);
+  }
+}
+
+// Estrategia de pago con PayPal
+class PayPalPayment extends PaymentStrategy {
+  pay(amount) {
+    console.log(`Pagando ${amount} usando PayPal`);
+  }
+}
+
+// Estrategia de pago con transferencia bancaria
+class BankTransferPayment extends PaymentStrategy {
+  pay(amount) {
+    console.log(`Pagando ${amount} usando transferencia bancaria`);
+  }
+}
+
+// Contexto que procesa los pagos
+class PaymentProcessor {
+  constructor(paymentStrategy) {
+    this.paymentStrategy = paymentStrategy;
+  }
+
+  setPaymentStrategy(paymentStrategy) {
+    this.paymentStrategy = paymentStrategy;
+  }
+
+  processPayment(amount) {
+    this.paymentStrategy.pay(amount);
+  }
+}
+
+// Uso
+const orderAmount = 100;
+const paymentProcessor = new PaymentProcessor(new CreditCartPayment());
+
+paymentProcessor.processPayment(orderAmount); // Pagando 100 usando tarjeta de credito
+
+paymentProcessor.setPaymentStrategy(new PayPalPayment());
+paymentProcessor.processPayment(orderAmount); // Pagando 100 usando PayPal
